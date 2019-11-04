@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Avatar from './Avatar';
 import Nickname from './Nickname';
+import { showPage, openConversation } from '../../shared/store/modules';
 import { defaultTheme } from '../../shared/theme';
 
 const StyledUserButton = styled.div`
@@ -25,19 +26,20 @@ export class UserButton extends React.Component {
     static Avatar = Avatar;
     static Nickname = Nickname;
 
-    openConversation = () => {
+    showConversation = () => {
         if (this.props.type === 'new') {// open new conversation
-            prompt("Write nickname of the person you want to connect to.")
+            const username = prompt("Write nickname of the person you want to connect to.");
+            this.props.dispatch(openConversation(username));
         }
         else {
-            return null;
+            this.props.dispatch(showPage(this.props.type));
         }
     }
 
     render() {
         const { avatar, username } = this.props;
         return (
-            <StyledUserButton onClick={ this.openConversation }>
+            <StyledUserButton onClick={ this.showConversation }>
                 <UserButton.Avatar img={ avatar }/>
                 <UserButton.Nickname>
                     { username }
@@ -46,7 +48,6 @@ export class UserButton extends React.Component {
         );
     }
 };
-
 
 const mapDispatchToProps = dispatch => ({ dispatch })
 

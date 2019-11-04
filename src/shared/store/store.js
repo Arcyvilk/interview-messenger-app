@@ -1,9 +1,10 @@
 import { createStore } from 'redux';
-import { SHOW_PAGE, SET_NICKNAME } from './modules';
+import { SHOW_PAGE, SET_NICKNAME, OPEN_CONVERSATION } from './modules';
 
 const defaultState = {
     nickname: null,
-    page: null
+    page: null,
+    conversations: []
 }
 
 const reducer = (state = defaultState, action) => {
@@ -18,6 +19,12 @@ const reducer = (state = defaultState, action) => {
             return {
                 ...state,
                 nickname: action.nickname
+            }
+        }
+        case OPEN_CONVERSATION: {
+            return {
+                ...state,
+                conversations: [ ...state.conversations, action.nickname ]
             }
         }
         default:

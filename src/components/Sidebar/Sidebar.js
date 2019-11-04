@@ -24,19 +24,27 @@ const Title = styled.div`
 
 class Sidebar extends React.Component {
   static Title = Title;
+
+  showAvailableConversations = () => {
+    console.log(this.props.state)
+    return this.props.state.conversations.map(conv => 
+      <UserButton username={conv} avatar={'https://docs.atlassian.com/aui/8.2.0/docs/images/avatar-person.svg'} type={ conv } />)
+    }
+
   render() {
     return (
       <StyledSidebar>
         <Sidebar.Title>Conversations</Sidebar.Title>
         <UserButton username={'Start new conversation'} avatar={'https://cdn.onlinewebfonts.com/svg/img_24970.png'} type='new' />;
+        {
+          this.showAvailableConversations()
+        }
       </StyledSidebar>
     );
   }
 };
 
-const mapStateToProps = state => ({ 
-  conversations: state.conversations
-})
+const mapStateToProps = state => ({ state })
 
 export default connect(
   mapStateToProps

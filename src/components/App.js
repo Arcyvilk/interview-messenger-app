@@ -6,6 +6,7 @@ import Header from './Header';
 import Sidebar from './Sidebar';
 import Login from './pages/Login';
 import './App.css';
+import Conversation from './pages/Conversation/Conversation';
 
 const MainWrapper = styled.div`
   display: flex;
@@ -32,8 +33,13 @@ class App extends React.Component {
           ? <>
             <Sidebar />
             <ContentWrapper>
-              <Header>{ this.props.nickname.toUpperCase() }</Header>
+              <Header>{ this.props.page ? `Conversation with ${this.props.page}`.toUpperCase() : null }</Header>
               <Content>
+                {
+                  this.props.page
+                  ? <Conversation user={ this.props.page }></Conversation>
+                  : null
+                }
               </Content>
             </ContentWrapper>
             </>
@@ -47,7 +53,8 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  nickname: state.nickname
+  nickname: state.nickname,
+  page: state.page
 })
 
 export default connect(
