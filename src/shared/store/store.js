@@ -1,7 +1,8 @@
 import { createStore } from 'redux';
-import { SHOW_PAGE } from './modules';
+import { SHOW_PAGE, SET_NICKNAME } from './modules';
 
 const defaultState = {
+    nickname: null,
     page: 'login'
 }
 
@@ -11,6 +12,12 @@ const reducer = (state = defaultState, action) => {
             return {
                 ...state,
                 page: action.page
+            }
+        }
+        case SET_NICKNAME: {
+            return {
+                ...state,
+                nickname: action.nickname
             }
         }
         default:

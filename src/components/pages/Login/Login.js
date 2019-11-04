@@ -1,5 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { setNickname } from '../../../shared/store/modules';
 import { defaultTheme } from '../../../shared/theme';
 
 const StyledLogin = styled.form`
@@ -32,19 +34,12 @@ const StyledButton = styled.div`
 `;
 
 class Login extends React.Component { 
-    constructor() {
-        super();
-        this.state = {
-            nickname: null
-        };
-    }
-
     setNickname = () => {
         if (!this.nickname.value) {
             alert('Please provide nickname.');
             return;
         }
-        this.setState({ nickname: this.nickname.value });
+        this.props.dispatch(setNickname(this.nickname.value));
     }
 
     render() {
@@ -58,4 +53,8 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+const mapDispatchToProps = dispatch => ({ dispatch })
+export default connect(
+    null,
+    mapDispatchToProps
+)(Login);

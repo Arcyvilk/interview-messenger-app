@@ -1,9 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Content from './Content';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import Login from './pages/Login';
+import Conversation from './pages/Conversation';
 import './App.css';
 
 const MainWrapper = styled.div`
@@ -16,22 +18,40 @@ const MainWrapper = styled.div`
 const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
 `;
 
-const App = () => {
-  return (
-    <MainWrapper>
-      <Sidebar />
-      <ContentWrapper>
-        <Header>Test.</Header>
-        <Content>
-          <Login />
-        </Content>
-      </ContentWrapper>
-    </MainWrapper>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <MainWrapper> 
+      {
+        this.props.nickname
+          ? <>
+            <Sidebar />
+            <ContentWrapper>
+              <Header>{ this.props.nickname.toUpperCase() }</Header>
+              <Content>
+                <Conversation />
+              </Content>
+            </ContentWrapper>
+            </>
+          : <ContentWrapper>
+              <Login />
+            </ContentWrapper>
+      }
+      </MainWrapper>
+    )
+  }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  nickname: state.nickname
+})
+
+export default connect(
+  mapStateToProps
+)(App);
