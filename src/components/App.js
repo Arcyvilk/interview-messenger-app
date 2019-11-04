@@ -1,25 +1,59 @@
 import React from 'react';
-import logo from '../shared/images/logo.svg'
+import styled from 'styled-components';
+import { defaultTheme } from '../shared/theme';
 import './App.css';
 
-function App() {
+const MainWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  height: 100vh;
+`;
+
+const Sidebar = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: 100%;
+  background-color: ${ defaultTheme.primary };
+  color: ${ defaultTheme.secondary };
+`;
+
+const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+`;
+
+const Header = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  min-height: 100px;
+  background-color: ${ defaultTheme.primary };
+  color: ${ defaultTheme.secondary };
+`;
+
+const Content = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: ${ defaultTheme.secondary };
+  color: ${ defaultTheme.primary };
+`;
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MainWrapper>
+      <Sidebar />
+      <ContentWrapper>
+        <Header></Header>
+        <Content></Content>
+      </ContentWrapper>
+    </MainWrapper>
   );
 }
 
