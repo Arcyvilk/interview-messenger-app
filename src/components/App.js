@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Content from './Content';
 import Header from './Header';
 import Sidebar from './Sidebar';
+import Login from './pages/Login';
 import './App.css';
 
 const MainWrapper = styled.div`
@@ -25,7 +26,9 @@ const App = () => {
       <Sidebar />
       <ContentWrapper>
         <Header>Test.</Header>
-        <Content>Test.</Content>
+        <Content>
+          <Login />
+        </Content>
       </ContentWrapper>
     </MainWrapper>
   );
