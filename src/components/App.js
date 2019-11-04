@@ -5,7 +5,6 @@ import Content from './Content';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import Login from './pages/Login';
-import Conversation from './pages/Conversation';
 import './App.css';
 
 const MainWrapper = styled.div`
@@ -35,7 +34,6 @@ class App extends React.Component {
             <ContentWrapper>
               <Header>{ this.props.nickname.toUpperCase() }</Header>
               <Content>
-                <Conversation />
               </Content>
             </ContentWrapper>
             </>

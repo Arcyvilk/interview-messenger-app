@@ -3,7 +3,7 @@ import { SHOW_PAGE, SET_NICKNAME } from './modules';
 
 const defaultState = {
     nickname: null,
-    page: 'login'
+    page: null
 }
 
 const reducer = (state = defaultState, action) => {
