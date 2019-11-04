@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { defaultTheme } from '../shared/theme';
+import Content from './Content';
+import Header from './Header';
+import Sidebar from './Sidebar';
 import './App.css';
 
 const MainWrapper = styled.div`
@@ -10,15 +12,6 @@ const MainWrapper = styled.div`
   height: 100vh;
 `;
 
-const Sidebar = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 400px;
-  height: 100%;
-  background-color: ${ defaultTheme.primary };
-  color: ${ defaultTheme.secondary };
-`;
-
 const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -26,32 +19,13 @@ const ContentWrapper = styled.div`
   height: 100%;
 `;
 
-const Header = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100px;
-  min-height: 100px;
-  background-color: ${ defaultTheme.primary };
-  color: ${ defaultTheme.secondary };
-`;
-
-const Content = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100%;
-  background-color: ${ defaultTheme.secondary };
-  color: ${ defaultTheme.primary };
-`;
-
 const App = () => {
   return (
     <MainWrapper>
       <Sidebar />
       <ContentWrapper>
-        <Header></Header>
-        <Content></Content>
+        <Header>Test.</Header>
+        <Content>Test.</Content>
       </ContentWrapper>
     </MainWrapper>
   );
