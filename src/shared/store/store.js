@@ -1,30 +1,47 @@
 import { createStore } from 'redux';
-import { SHOW_PAGE, SET_NICKNAME, OPEN_CONVERSATION } from './modules';
+import { SET_NICKNAME, OPEN_CONNECTIONS, ACTIVE_CONVERSATION, NEW_MESSAGE } from './modules';
+
+const saveMessage = (savedConnections, connection, message) => 
+    savedConnections.map(con => {
+        if (con.connection.id === connection.id)
+            con.messages.push(message);
+        return con;
+    });
 
 const defaultState = {
     nickname: null,
-    page: null,
-    conversations: []
+    connections: [],
+    activeConversation: null
 }
 
 const reducer = (state = defaultState, action) => {
     switch(action.type) {
-        case SHOW_PAGE: {
-            return {
-                ...state,
-                page: action.page
-            }
-        }
         case SET_NICKNAME: {
             return {
                 ...state,
                 nickname: action.nickname
             }
         }
-        case OPEN_CONVERSATION: {
+        case OPEN_CONNECTIONS: {
             return {
                 ...state,
-                conversations: [ ...state.conversations, action.nickname ]
+                connections: [ ...state.connections, {
+                    remoteId: action.remoteId,
+                    messages: [],
+                    connection: action.connection
+                } ]
+            }
+        }
+        case ACTIVE_CONVERSATION: {
+            return {
+                ...state,
+                activeConversation: action.connection
+            }
+        }
+        case NEW_MESSAGE: {
+            return {
+                ...state,
+                connections: [ ...saveMessage(state.connections, action.connection, action.message) ]
             }
         }
         default:
@@ -32,4 +49,7 @@ const reducer = (state = defaultState, action) => {
     }
 }
 
-export default createStore(reducer);
+export default createStore(
+    reducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);

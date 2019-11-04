@@ -25,17 +25,16 @@ const Title = styled.div`
 class Sidebar extends React.Component {
   static Title = Title;
 
-  showAvailableConversations = () => {
-    console.log(this.props.state)
-    return this.props.state.conversations.map(conv => 
-      <UserButton username={conv} avatar={'https://docs.atlassian.com/aui/8.2.0/docs/images/avatar-person.svg'} type={ conv } />)
-    }
+  showAvailableConversations = () => 
+    this.props.state.connections.map(conn => 
+      <UserButton remoteId={conn.remoteId} avatar={'https://docs.atlassian.com/aui/8.2.0/docs/images/avatar-person.svg'} type={ conn.connection.id } />
+    )
 
   render() {
     return (
       <StyledSidebar>
         <Sidebar.Title>Conversations</Sidebar.Title>
-        <UserButton username={'Start new conversation'} avatar={'https://cdn.onlinewebfonts.com/svg/img_24970.png'} type='new' />;
+        <UserButton remoteId={ 'Start new conversation' } avatar={'https://cdn.onlinewebfonts.com/svg/img_24970.png'} type='new' />;
         {
           this.showAvailableConversations()
         }

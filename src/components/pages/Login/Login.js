@@ -39,13 +39,17 @@ class Login extends React.Component {
             alert('Please provide nickname.');
             return;
         }
+        if (this.nickname.value.length < 3) {
+            alert('Your nickname is too short.');
+            return;
+        }
         this.props.dispatch(setNickname(this.nickname.value));
     }
 
     render() {
         return (
             <StyledLogin>
-                <label for='textbox_nickname'>Your nickname</label>
+                <label for='textbox_nickname'>Your nickname (min. 3 characters)</label>
                 <input type='text' name='textbox_nickname' ref={ input => this.nickname = input }></input>
                 <StyledButton onClick={ this.setNickname }>Connect</StyledButton>
             </StyledLogin>

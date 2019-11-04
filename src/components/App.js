@@ -5,8 +5,8 @@ import Content from './Content';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import Login from './pages/Login';
+import Conversation from './pages/Conversation';
 import './App.css';
-import Conversation from './pages/Conversation/Conversation';
 
 const MainWrapper = styled.div`
   display: flex;
@@ -27,34 +27,34 @@ const ContentWrapper = styled.div`
 class App extends React.Component {
   render() {
     return (
-      <MainWrapper> 
-      {
-        this.props.nickname
-          ? <>
-            <Sidebar />
-            <ContentWrapper>
-              <Header>{ this.props.page ? `Conversation with ${this.props.page}`.toUpperCase() : null }</Header>
-              <Content>
-                {
-                  this.props.page
-                  ? <Conversation user={ this.props.page }></Conversation>
-                  : null
-                }
-              </Content>
-            </ContentWrapper>
-            </>
-          : <ContentWrapper>
-              <Login />
-            </ContentWrapper>
-      }
-      </MainWrapper>
+        <MainWrapper> 
+        {
+          this.props.nickname
+            ? <>
+              <Sidebar />
+              <ContentWrapper>
+                <Header>{ this.props.activeConversation ? `Conversation with ${this.props.activeConversation.remoteId}`.toUpperCase() : null }</Header>
+                <Content>
+                  {
+                    this.props.activeConversation
+                    ? <Conversation user={ this.props.activeConversation.remoteId }></Conversation>
+                    : null
+                  }
+                </Content>
+              </ContentWrapper>
+              </>
+            : <ContentWrapper>
+                <Login />
+              </ContentWrapper>
+        }
+        </MainWrapper>
     )
   }
 }
 
 const mapStateToProps = state => ({
   nickname: state.nickname,
-  page: state.page
+  activeConversation: state.activeConversation
 })
 
 export default connect(
