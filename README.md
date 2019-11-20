@@ -9,6 +9,7 @@ To run the project:
 - [CRITICAL] having conversation with more than one person simultanously causes sent messages to appear in both windows, and replies don't go to the proper channel
 - exiting the prompt opens conversation with null
 - there's no character length restriction on the remote ID prompt
+- there should be no way to include non-alphanumeric characters in nickname
 - you can open a conversation with yourself if you put your own nick in the prompt
 - redux store has too much depth
 - pressing enter in input fields either bugs the app or does nothing
